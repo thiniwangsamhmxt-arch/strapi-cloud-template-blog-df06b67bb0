@@ -1,0 +1,167 @@
+{
+  "kind": "collectionType",
+  "collectionName": "social_media_accounts",
+  "info": {
+    "singularName": "social-media-account",
+    "pluralName": "social-media-accounts",
+    "displayName": "Social Media Account",
+    "description": "Social media platform account connections and configurations"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": "Manages social media account connections with OAuth tokens"
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "description": "Friendly name for the account"
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "instagram",
+        "twitter",
+        "linkedin",
+        "tiktok",
+        "youtube",
+        "pinterest",
+        "threads"
+      ],
+      "required": true,
+      "description": "Social media platform"
+    },
+    "platformAccountId": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "description": "Unique account ID from the platform"
+    },
+    "username": {
+      "type": "string",
+      "required": true,
+      "description": "Platform username or handle"
+    },
+    "profileUrl": {
+      "type": "string",
+      "description": "URL to the profile page"
+    },
+    "profileImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"],
+      "description": "Profile picture"
+    },
+    "accessToken": {
+      "type": "text",
+      "private": true,
+      "description": "Encrypted OAuth access token"
+    },
+    "refreshToken": {
+      "type": "text",
+      "private": true,
+      "description": "Encrypted OAuth refresh token"
+    },
+    "tokenExpiry": {
+      "type": "datetime",
+      "description": "When the access token expires"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the account is active and connected"
+    },
+    "lastSyncDate": {
+      "type": "datetime",
+      "description": "Last time account data was synchronized"
+    },
+    "accountMetadata": {
+      "type": "json",
+      "description": "Platform-specific account metadata",
+      "default": {
+        "followersCount": 0,
+        "followingCount": 0,
+        "postsCount": 0,
+        "verified": false
+      }
+    },
+    "rateLimitInfo": {
+      "type": "json",
+      "description": "API rate limit tracking",
+      "default": {
+        "remaining": 0,
+        "limit": 0,
+        "resetTime": null
+      }
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::social-media-post.social-media-post",
+      "mappedBy": "socialMediaAccounts",
+      "description": "Posts associated with this account"
+    },
+    "permissions": {
+      "type": "json",
+      "description": "Platform permissions granted",
+      "default": []
+    },
+    "scopes": {
+      "type": "json",
+      "description": "OAuth scopes granted",
+      "default": []
+    },
+    "connectionStatus": {
+      "type": "enumeration",
+      "enum": [
+        "connected",
+        "disconnected",
+        "expired",
+        "error",
+        "pending_auth"
+      ],
+      "default": "pending_auth",
+      "description": "Current connection status"
+    },
+    "lastError": {
+      "type": "text",
+      "description": "Last error message if connection failed"
+    },
+    "errorCount": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of consecutive errors"
+    },
+    "webhookUrl": {
+      "type": "string",
+      "description": "Webhook URL for platform notifications"
+    },
+    "notificationSettings": {
+      "type": "json",
+      "description": "Notification preferences for this account",
+      "default": {
+        "onPublish": true,
+        "onError": true,
+        "onEngagement": false
+      }
+    },
+    "publishingDefaults": {
+      "type": "json",
+      "description": "Default settings for posts from this account",
+      "default": {}
+    },
+    "accountType": {
+      "type": "enumeration",
+      "enum": ["personal", "business", "creator"],
+      "default": "personal",
+      "description": "Type of social media account"
+    },
+    "businessInfo": {
+      "type": "json",
+      "description": "Business account information",
+      "default": {}
+    }
+  }
+}

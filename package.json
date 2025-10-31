@@ -1,8 +1,8 @@
 {
-  "name": "my-app-name",
-  "version": "0.1.0",
+  "name": "strapi-social-media-cms",
+  "version": "1.0.0",
   "private": true,
-  "description": "A Strapi application",
+  "description": "Enterprise Social Media Content Management System powered by Strapi v5",
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
@@ -21,9 +21,24 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "styled-components": "^6.0.0",
+    "bullmq": "^5.0.0",
+    "ioredis": "^5.3.2",
+    "node-cron": "^3.0.3",
+    "axios": "^1.6.5",
+    "crypto-js": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "twitter-api-v2": "^1.15.2",
+    "facebook-nodejs-business-sdk": "^19.0.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "lodash": "^4.17.21",
+    "date-fns": "^3.0.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/crypto-js": "^4.2.1"
+  },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"

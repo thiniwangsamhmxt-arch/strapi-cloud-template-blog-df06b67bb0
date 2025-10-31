@@ -1,0 +1,183 @@
+{
+  "kind": "collectionType",
+  "collectionName": "social_media_posts",
+  "info": {
+    "singularName": "social-media-post",
+    "pluralName": "social-media-posts",
+    "displayName": "Social Media Post",
+    "description": "Comprehensive social media post management across multiple platforms"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": "Social media post with scheduling, analytics, and multi-platform support"
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "description": "Internal title for the post"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true,
+      "description": "Main content of the social media post"
+    },
+    "shortContent": {
+      "type": "text",
+      "maxLength": 280,
+      "description": "Short version for Twitter/X (280 characters)"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "scheduled",
+        "publishing",
+        "published",
+        "failed",
+        "archived"
+      ],
+      "default": "draft",
+      "required": true,
+      "description": "Current status of the post"
+    },
+    "platforms": {
+      "type": "json",
+      "description": "Target platforms with platform-specific configurations",
+      "default": []
+    },
+    "scheduledPublishDate": {
+      "type": "datetime",
+      "description": "When the post should be published"
+    },
+    "actualPublishDate": {
+      "type": "datetime",
+      "description": "When the post was actually published"
+    },
+    "timezone": {
+      "type": "string",
+      "default": "UTC",
+      "description": "Timezone for scheduling"
+    },
+    "media": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "videos", "files"],
+      "description": "Media attachments for the post"
+    },
+    "hashtags": {
+      "type": "json",
+      "description": "Array of hashtags",
+      "default": []
+    },
+    "mentions": {
+      "type": "json",
+      "description": "Array of user mentions",
+      "default": []
+    },
+    "socialMediaAccounts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::social-media-account.social-media-account",
+      "inversedBy": "posts",
+      "description": "Social media accounts to publish to"
+    },
+    "campaign": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::campaign.campaign",
+      "inversedBy": "posts",
+      "description": "Campaign this post belongs to"
+    },
+    "analytics": {
+      "type": "json",
+      "description": "Engagement metrics and analytics data",
+      "default": {
+        "likes": 0,
+        "shares": 0,
+        "comments": 0,
+        "views": 0,
+        "clicks": 0,
+        "reach": 0,
+        "impressions": 0
+      }
+    },
+    "platformPostIds": {
+      "type": "json",
+      "description": "Post IDs from each platform after publishing",
+      "default": {}
+    },
+    "platformUrls": {
+      "type": "json",
+      "description": "URLs to the published posts on each platform",
+      "default": {}
+    },
+    "errorLog": {
+      "type": "json",
+      "description": "Error messages if publishing failed",
+      "default": []
+    },
+    "retryCount": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of retry attempts for failed posts"
+    },
+    "maxRetries": {
+      "type": "integer",
+      "default": 3,
+      "description": "Maximum retry attempts allowed"
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": ["low", "normal", "high", "urgent"],
+      "default": "normal",
+      "description": "Publishing priority for queue management"
+    },
+    "approvalStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "approved", "rejected", "needs_revision"],
+      "default": "pending",
+      "description": "Approval workflow status"
+    },
+    "approvedBy": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "admin::user",
+      "description": "User who approved the post"
+    },
+    "approvalNotes": {
+      "type": "text",
+      "description": "Notes from the approver"
+    },
+    "linkPreview": {
+      "type": "json",
+      "description": "Open Graph data for link preview",
+      "default": {}
+    },
+    "autoPublish": {
+      "type": "boolean",
+      "default": false,
+      "description": "Automatically publish when scheduled time arrives"
+    },
+    "notifyOnPublish": {
+      "type": "boolean",
+      "default": true,
+      "description": "Send notifications when post is published"
+    },
+    "targetAudience": {
+      "type": "json",
+      "description": "Target audience demographics and interests",
+      "default": {}
+    },
+    "abTestVariant": {
+      "type": "string",
+      "description": "A/B test variant identifier"
+    }
+  }
+}
