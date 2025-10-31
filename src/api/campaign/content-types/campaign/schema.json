@@ -1,0 +1,167 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campaigns",
+  "info": {
+    "singularName": "campaign",
+    "pluralName": "campaigns",
+    "displayName": "Campaign",
+    "description": "Marketing campaigns with posts, analytics, and KPI tracking"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": "Organize social media posts into campaigns"
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "description": "Campaign name"
+    },
+    "description": {
+      "type": "richtext",
+      "description": "Campaign description and objectives"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "active",
+        "paused",
+        "completed",
+        "archived"
+      ],
+      "default": "draft",
+      "required": true,
+      "description": "Campaign status"
+    },
+    "startDate": {
+      "type": "date",
+      "required": true,
+      "description": "Campaign start date"
+    },
+    "endDate": {
+      "type": "date",
+      "required": true,
+      "description": "Campaign end date"
+    },
+    "budget": {
+      "type": "decimal",
+      "default": 0,
+      "description": "Campaign budget"
+    },
+    "spent": {
+      "type": "decimal",
+      "default": 0,
+      "description": "Amount spent so far"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "maxLength": 3,
+      "description": "Currency code (ISO 4217)"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::social-media-post.social-media-post",
+      "mappedBy": "campaign",
+      "description": "Posts in this campaign"
+    },
+    "kpis": {
+      "type": "json",
+      "description": "Key Performance Indicators",
+      "default": {
+        "targetReach": 0,
+        "targetEngagement": 0,
+        "targetConversions": 0,
+        "targetROI": 0
+      }
+    },
+    "actualMetrics": {
+      "type": "json",
+      "description": "Actual performance metrics",
+      "default": {
+        "reach": 0,
+        "engagement": 0,
+        "conversions": 0,
+        "roi": 0,
+        "totalPosts": 0,
+        "publishedPosts": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0,
+        "clicks": 0
+      }
+    },
+    "targetAudience": {
+      "type": "json",
+      "description": "Target audience demographics",
+      "default": {
+        "ageRange": [],
+        "locations": [],
+        "interests": [],
+        "gender": "all"
+      }
+    },
+    "platforms": {
+      "type": "json",
+      "description": "Target platforms for this campaign",
+      "default": []
+    },
+    "tags": {
+      "type": "json",
+      "description": "Campaign tags for organization",
+      "default": []
+    },
+    "hashtags": {
+      "type": "json",
+      "description": "Campaign hashtags",
+      "default": []
+    },
+    "teamMembers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "admin::user",
+      "description": "Team members working on this campaign"
+    },
+    "campaignManager": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "admin::user",
+      "description": "Campaign manager/owner"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand or product name"
+    },
+    "campaignType": {
+      "type": "enumeration",
+      "enum": [
+        "awareness",
+        "engagement",
+        "conversion",
+        "retention",
+        "seasonal",
+        "product_launch",
+        "event"
+      ],
+      "default": "awareness",
+      "description": "Type of campaign"
+    },
+    "notes": {
+      "type": "richtext",
+      "description": "Internal notes and updates"
+    },
+    "trackingUrls": {
+      "type": "json",
+      "description": "UTM and tracking URLs",
+      "default": {}
+    },
+    "competitors": {
+      "type": "json",
+      "description": "Competitor analysis data",
+      "default": []
+    }
+  }
+}
