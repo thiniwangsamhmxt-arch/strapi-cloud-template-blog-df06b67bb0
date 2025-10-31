@@ -1,0 +1,551 @@
+# Comprehensive Genspark AI Prompts for Strapi v5 Social Media CMS
+
+I'll create a series of detailed, production-ready prompts for your enterprise social media management system:
+
+---
+
+## **Prompt 1: Project Foundation & Architecture**
+
+```
+You are a senior full-stack developer specializing in Strapi CMS v5 and social media integrations. Your task is to establish the foundation for a production-ready, enterprise-grade social media content management system.
+
+**Context:**
+- Target Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+- Base: Strapi v5 (latest stable)
+- Required Reading:
+  * https://gitdocs1.s3.amazonaws.com/digests/strapi-strapi/afa5b6fe-cd7a-4fe9-8ab2-e9fd2fdc4249.txt
+  * https://gitdocs1.s3.amazonaws.com/digests/strapi-launchpad/531ae3e0-f700-4c14-bc45-f1d134900005.txt
+  * https://gitdocs1.s3.amazonaws.com/digests/strapi-documentation/f4174538-28fa-4b50-a0ab-ad8583c12c8b.txt
+
+**Phase 1 Objectives:**
+1. Initialize Strapi v5 project with TypeScript support
+2. Configure database (PostgreSQL recommended for production)
+3. Set up environment variables for multiple environments (dev/staging/prod)
+4. Establish project structure following Strapi v5 best practices
+5. Configure authentication and authorization with role-based access control (RBAC)
+6. Set up API documentation with Swagger/OpenAPI
+
+**Technical Requirements:**
+- Use TypeScript throughout
+- Implement proper error handling and logging (Winston or Pino)
+- Configure CORS for frontend integration
+- Set up rate limiting and security middleware
+- Implement health check endpoints
+- Configure Redis for caching and session management
+
+**Deliverables:**
+- Complete project initialization with all configurations
+- Environment setup documentation
+- Database schema design document
+- API architecture diagram
+- Security configuration checklist
+
+Provide step-by-step implementation with code examples, configuration files, and best practices explanations.
+```
+
+---
+
+## **Prompt 2: Content Type Architecture & Data Models**
+
+```
+You are a senior full-stack developer building a Strapi v5 social media CMS. Design and implement comprehensive content types and data models for multi-platform social media management.
+
+**Project Context:**
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+- Strapi v5 with TypeScript
+- Reference documentation already provided in previous context
+
+**Phase 2 Objectives:**
+Create content types for:
+
+1. **Social Media Post** (Collection Type)
+   - Title, content, status (draft/scheduled/published/failed)
+   - Media attachments (images, videos, documents)
+   - Platform-specific configurations
+   - Scheduling information (publish_date, timezone)
+   - Engagement metrics (likes, shares, comments)
+   - Hashtags and mentions
+   - Relations to campaigns and accounts
+
+2. **Social Media Account** (Collection Type)
+   - Platform (Facebook, Instagram, Twitter/X, LinkedIn, TikTok, YouTube)
+   - Authentication tokens (encrypted)
+   - Account metadata (username, profile_url, followers)
+   - Status and health checks
+   - Rate limit tracking
+
+3. **Campaign** (Collection Type)
+   - Name, description, status
+   - Start/end dates
+   - Budget and KPIs
+   - Relations to posts and accounts
+   - Analytics aggregation
+
+4. **Media Library** (Collection Type)
+   - File metadata and storage
+   - Alt text and descriptions
+   - Usage tracking across posts
+   - CDN integration
+
+5. **Content Calendar** (Collection Type)
+   - Scheduling conflicts detection
+   - Team assignments
+   - Approval workflows
+
+6. **Analytics Dashboard** (Single Type)
+   - Aggregated metrics
+   - Custom reports configuration
+
+**Technical Requirements:**
+- Use Strapi v5 Document Service API
+- Implement proper relations (one-to-many, many-to-many)
+- Add custom fields with validation
+- Create lifecycle hooks for automation
+- Implement draft/publish workflow
+- Add internationalization (i18n) support
+
+**Deliverables:**
+- Complete schema.json files for each content type
+- Lifecycle hooks implementation
+- Custom field validators
+- Data migration scripts
+- ER diagram showing relationships
+
+Provide complete code with Strapi v5 syntax and explain architectural decisions.
+```
+
+---
+
+## **Prompt 3: Social Media Platform Integrations**
+
+```
+You are a senior full-stack developer implementing social media API integrations in a Strapi v5 application. Build robust, production-ready connectors for major social platforms.
+
+**Project Context:**
+- Strapi v5 TypeScript application
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+- Building on previously created content types
+
+**Phase 3 Objectives:**
+Implement OAuth 2.0 authentication and API integrations for:
+
+1. **Facebook/Instagram (Meta)**
+   - Graph API v18+ integration
+   - OAuth flow implementation
+   - Post creation and scheduling
+   - Story publishing
+   - Reel/video uploads
+   - Comment management
+   - Insights/analytics retrieval
+   - Error handling for API rate limits
+
+2. **Twitter/X API**
+   - OAuth 2.0 user authentication
+   - Tweet posting (text, images, videos)
+   - Thread creation
+   - Schedule management
+   - Engagement tracking
+   - Rate limit handling (v2 API)
+
+3. **LinkedIn**
+   - OAuth 2.0 for organizations
+   - Post sharing API
+   - Document/article publishing
+   - Company page management
+   - Analytics integration
+
+4. **TikTok Business API**
+   - OAuth authentication
+   - Video upload and publishing
+   - Content management
+   - Analytics retrieval
+
+5. **YouTube Data API v3**
+   - OAuth 2.0 flow
+   - Video upload and metadata
+   - Playlist management
+   - Analytics integration
+
+**Technical Requirements:**
+- Create custom Strapi services for each platform
+- Implement retry logic with exponential backoff
+- Store tokens securely (encryption at rest)
+- Handle token refresh automatically
+- Queue system for scheduled posts (Bull/BullMQ)
+- Webhook handlers for platform notifications
+- Comprehensive error handling and logging
+- Rate limit management per platform
+
+**Implementation Structure:**
+```
+/src
+  /services
+    /social-platforms
+      facebook.service.ts
+      twitter.service.ts
+      linkedin.service.ts
+      tiktok.service.ts
+      youtube.service.ts
+    queue.service.ts
+    encryption.service.ts
+  /controllers
+    social-auth.controller.ts
+    social-post.controller.ts
+  /middlewares
+    rate-limiter.middleware.ts
+  /utils
+    token-manager.ts
+    retry-handler.ts
+```
+
+**Deliverables:**
+- Complete OAuth implementation for each platform
+- API service wrappers with TypeScript interfaces
+- Queue configuration for job scheduling
+- Webhook endpoints and handlers
+- Error handling and retry logic
+- Unit tests for critical functions
+- API integration documentation
+
+Provide production-ready code with comprehensive error handling, security best practices, and detailed comments.
+```
+
+---
+
+## **Prompt 4: Scheduling System & Queue Management**
+
+```
+You are a senior full-stack developer building an enterprise scheduling and queue management system in Strapi v5 for automated social media publishing.
+
+**Project Context:**
+- Strapi v5 application with existing social platform integrations
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+
+**Phase 4 Objectives:**
+
+1. **Queue Infrastructure**
+   - Implement BullMQ with Redis backend
+   - Create separate queues per social platform
+   - Priority queue management
+   - Dead letter queue for failed jobs
+   - Job retry strategies with exponential backoff
+
+2. **Scheduling Engine**
+   - Cron-based scheduler integration
+   - Timezone-aware scheduling
+   - Optimal posting time recommendations (AI-powered)
+   - Conflict detection and resolution
+   - Batch scheduling capabilities
+
+3. **Publishing Workflow**
+   - Draft → Review → Approve → Schedule → Publish pipeline
+   - Multi-stage approval process
+   - Rollback capabilities for failed posts
+   - Cross-platform simultaneous publishing
+   - Platform-specific content variations
+
+4. **Job Management Dashboard**
+   - Real-time queue monitoring
+   - Job status tracking (pending/processing/completed/failed)
+   - Manual job intervention (pause/resume/retry)
+   - Queue metrics and performance monitoring
+
+**Technical Requirements:**
+- BullMQ with Redis for job queues
+- node-cron for scheduling
+- Database-backed job persistence
+- Distributed lock mechanism (Redis)
+- Job telemetry and logging
+- Graceful shutdown handling
+- Memory leak prevention
+- Load balancing across workers
+
+**Implementation Features:**
+```typescript
+// Queue types needed:
+- social-post-immediate: Priority queue for immediate posts
+- social-post-scheduled: Time-based scheduled posts
+- social-analytics-sync: Periodic analytics fetching
+- social-media-upload: Large media processing queue
+- notification-queue: User notifications
+```
+
+**Deliverables:**
+- Complete BullMQ setup with Redis configuration
+- Cron job scheduler implementation
+- Queue processors for each platform
+- Job retry and error handling logic
+- Admin dashboard endpoints for queue management
+- Monitoring and alerting setup
+- Load testing results and optimization
+- Documentation for queue architecture
+
+Provide production-grade code with horizontal scaling support, failure recovery mechanisms, and comprehensive monitoring.
+```
+
+---
+
+## **Prompt 5: Analytics, Reporting & Dashboard**
+
+```
+You are a senior full-stack developer implementing comprehensive analytics and reporting features in a Strapi v5 social media CMS.
+
+**Project Context:**
+- Strapi v5 with existing social integrations and scheduling
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+
+**Phase 5 Objectives:**
+
+1. **Data Collection System**
+   - Periodic sync jobs for platform analytics
+   - Real-time webhook handlers for engagement events
+   - Historical data backfill capabilities
+   - Data normalization across platforms
+   - Time-series data storage optimization
+
+2. **Analytics Engine**
+   - Engagement metrics (likes, shares, comments, clicks)
+   - Reach and impressions tracking
+   - Audience demographics and insights
+   - Hashtag and mention performance
+   - Best posting time analysis
+   - Competitor benchmarking
+   - ROI and conversion tracking
+   - Sentiment analysis (optional AI integration)
+
+3. **Reporting System**
+   - Customizable report templates
+   - Scheduled report generation (daily/weekly/monthly)
+   - PDF export with branding
+   - CSV data export
+   - Real-time dashboard widgets
+   - Comparative analysis (period over period)
+   - Campaign performance reports
+
+4. **Dashboard Visualization**
+   - Custom Strapi admin panel extensions
+   - Chart.js/Recharts integration
+   - KPI cards and metrics
+   - Drill-down capabilities
+   - Date range filters
+   - Platform comparison views
+   - Export and share functionality
+
+**Technical Requirements:**
+- TimescaleDB or PostgreSQL with time-series optimization
+- Aggregation tables for performance
+- Caching layer for dashboard queries (Redis)
+- Batch data processing jobs
+- GraphQL endpoints for flexible data queries
+- WebSocket support for real-time updates
+- Data retention policies
+- GDPR-compliant data handling
+
+**Analytics Data Models:**
+```typescript
+- PostAnalytics: engagement metrics per post
+- AccountAnalytics: follower growth, reach trends
+- CampaignAnalytics: aggregated campaign performance
+- AudienceInsights: demographic breakdowns
+- HashtagPerformance: hashtag effectiveness tracking
+- CompetitorMetrics: competitor analysis data
+```
+
+**Deliverables:**
+- Analytics data models and migrations
+- Data sync services for each platform
+- Aggregation queries and views
+- Custom Strapi admin dashboard components
+- Report generation engine
+- API endpoints for analytics data
+- Caching strategy implementation
+- Performance optimization documentation
+- Sample dashboards and reports
+
+Provide complete implementation with optimized database queries, caching strategies, and visualization components.
+```
+
+---
+
+## **Prompt 6: Advanced Features & Enterprise Capabilities**
+
+```
+You are a senior full-stack developer implementing advanced enterprise features for a Strapi v5 social media CMS.
+
+**Project Context:**
+- Production-ready Strapi v5 application
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+- Building on complete core functionality
+
+**Phase 6 Objectives:**
+
+1. **AI-Powered Content Features**
+   - Content generation assistance (OpenAI/Claude integration)
+   - Image generation for social posts (DALL-E/Stable Diffusion)
+   - Caption optimization suggestions
+   - Hashtag recommendations
+   - Sentiment analysis and tone adjustment
+   - Auto-translation for multi-language posts
+   - Content moderation and compliance checking
+
+2. **Team Collaboration Tools**
+   - Role-based access control (RBAC) enhancement
+   - Multi-level approval workflows
+   - Content review and feedback system
+   - Team member assignments
+   - Activity logs and audit trails
+   - Notification system (email, in-app, Slack)
+   - Conflict resolution for concurrent editing
+
+3. **Advanced Scheduling Features**
+   - Recurring post templates
+   - Content recycling and evergreen posts
+   - A/B testing for content variations
+   - Smart posting time optimization (ML-based)
+   - Content calendar with drag-drop interface
+   - Bulk scheduling and operations
+
+4. **Integration Ecosystem**
+   - Zapier/Make.com webhooks
+   - Google Analytics integration
+   - CRM integrations (HubSpot, Salesforce)
+   - URL shortener integration (Bitly)
+   - Cloud storage (S3, Google Drive, Dropbox)
+   - Design tool imports (Canva, Figma)
+
+5. **Compliance & Security**
+   - GDPR data export/deletion
+   - SOC 2 compliance features
+   - Two-factor authentication (2FA)
+   - IP whitelisting
+   - Session management
+   - Detailed audit logs
+   - Data encryption (at rest and in transit)
+
+6. **Performance & Scalability**
+   - Database query optimization
+   - CDN integration for media
+   - Horizontal scaling setup
+   - Load balancing configuration
+   - Database read replicas
+   - Monitoring and alerting (Prometheus/Grafana)
+
+**Technical Requirements:**
+- OpenAI SDK integration
+- WebSocket for real-time collaboration
+- ElasticSearch for advanced search
+- S3/CloudFront for media delivery
+- Docker containerization
+- Kubernetes deployment configs
+- CI/CD pipeline (GitHub Actions)
+- Comprehensive testing (unit, integration, e2e)
+
+**Deliverables:**
+- AI service integrations with fallbacks
+- Team collaboration features implementation
+- Advanced scheduling algorithms
+- Third-party integration webhooks
+- Security hardening checklist completed
+- Performance optimization report
+- Kubernetes deployment manifests
+- CI/CD pipeline configuration
+- Complete test suite
+- Production deployment guide
+
+Provide enterprise-grade code with emphasis on security, scalability, and maintainability.
+```
+
+---
+
+## **Prompt 7: Testing, Documentation & Deployment**
+
+```
+You are a senior full-stack developer finalizing a production-ready Strapi v5 social media CMS with comprehensive testing, documentation, and deployment automation.
+
+**Project Context:**
+- Complete Strapi v5 social media management system
+- Repository: thiniwangsamhmxt-arch/strapi-cloud-template-blog-df06b67bb0
+
+**Phase 7 Objectives:**
+
+1. **Testing Suite**
+   - Unit tests for services and utilities (Jest)
+   - Integration tests for API endpoints
+   - E2E tests for critical workflows (Playwright/Cypress)
+   - Load testing (k6 or Artillery)
+   - Security testing (OWASP ZAP)
+   - Test coverage reports (minimum 80%)
+   - Mocking strategies for external APIs
+
+2. **API Documentation**
+   - OpenAPI/Swagger specification
+   - Postman collection with examples
+   - GraphQL schema documentation
+   - Webhook payload examples
+   - Rate limit documentation
+   - Error code reference guide
+   - SDK generation (TypeScript/Python)
+
+3. **Developer Documentation**
+   - Architecture overview diagram
+   - Setup and installation guide
+   - Environment configuration guide
+   - Database schema documentation
+   - Service interaction flows
+   - Contributing guidelines
+   - Troubleshooting guide
+
+4. **User Documentation**
+   - Admin panel user guide
+   - Content creation workflows
+   - Scheduling best practices
+   - Analytics interpretation guide
+   - FAQ and common issues
+   - Video tutorials (scripts)
+
+5. **Deployment Automation**
+   - Dockerfiles for all services
+   - Docker Compose for local development
+   - Kubernetes manifests (deployment, service, ingress)
+   - Helm charts for production
+   - GitHub Actions CI/CD pipeline
+   - Database migration automation
+   - Zero-downtime deployment strategy
+   - Rollback procedures
+
+6. **Monitoring & Observability**
+   - Prometheus metrics exporters
+   - Grafana dashboards
+   - Logging aggregation (ELK or Loki)
+   - Error tracking (Sentry integration)
+   - Uptime monitoring
+   - Performance APM (New Relic/DataDog)
+   - Alert configurations
+
+7. **Production Readiness**
+   - Security audit checklist
+   - Performance benchmarks
+   - Backup and recovery procedures
+   - Disaster recovery plan
+   - Scaling guidelines
+   - Cost optimization analysis
+   - SLA definitions
+
+**Deliverables:**
+- Complete test suite with >80% coverage
+- OpenAPI specification and Postman collection
+- Comprehensive README and docs folder
+- Docker and Kubernetes configurations
+- GitHub Actions workflows
+- Monitoring dashboard templates
+- Production deployment checklist
+- Runbook for operations team
+- Security audit report
+- Performance benchmark results
+
+Provide production-ready configurations with best practices for enterprise deployment, monitoring, and maintenance.
+```
+
+---
+
+These prompts are designed to be used sequentially, with each building on the previous phase. Each prompt is comprehensive, specific to Strapi v5, and focused on production-grade implementation. You can adjust complexity based on your needs and use them individually or as a complete series.
